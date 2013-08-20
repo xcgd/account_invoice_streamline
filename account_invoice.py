@@ -34,9 +34,23 @@ class account_invoice_line_analytic(osv.Model):
         ),
     }
 
+    def move_line_get_item(self, cr, uid, line, context=None):
+        res = super(account_invoice_line_analytic, self)\
+            .move_line_get_item(cr, uid, line, context=context)
+        for i in range(1, 6):
+            key = "a%s_id" % i
+            val = getattr(line, key).id
+            res[key] = val
+        return res
+        
+
+
+class account_invoice_analytic(osv.Model):
+    _name = "account.invoice"
+    _inherit = "account.invoice"
+
     def fields_view_get(self, cr, uid, view_id=None, view_type=False,
                         context=None, toolbar=False, submenu=False):
-        print "FIELDS VIEW GET CALLED"
         '''
         Display analysis code in account move lines trees
         '''
@@ -44,7 +58,7 @@ class account_invoice_line_analytic(osv.Model):
             context = {}
         print "Context is"
         print context
-        res = super(account_invoice_line_analytic, self).fields_view_get(
+        res = super(account_invoice_analytic, self).fields_view_get(
             cr, uid, view_id=view_id,
             view_type=view_type, context=context,
             toolbar=toolbar, submenu=False)
@@ -109,15 +123,11 @@ class account_invoice_line_analytic(osv.Model):
                 'views']['tree']['arch'] = etree.tostring(doc)
         return res
 
-    # We override the Hook method of account_invoice
-    # to add our analytic codes
-    def finalize_invoice_move_lines(self, cr, uid, invoice_browse, move_lines):
-        print "************************************"
-        print invoice_browse
-        print "************************************"
-        print move_lines
-        print "************************************"
-        return super(
-            account_invoice_line_analytic,
-            self).finalize_invoice_move_lines(
-                cr, uid, invoices_browse, move_lines)
+    def line_get_convert(self, cr, uid, x, part, date, context=None):
+        res = super(account_invoice_analytic, self)\
+            .line_get_convert(cr, uid, x, part, date, context)
+        for i in range(1, 6):
+            key = "a%s_id" % i
+            val = x.get(key)
+            res[key] = val
+        return res
