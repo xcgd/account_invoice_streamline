@@ -66,8 +66,6 @@ class account_invoice_analytic(osv.Model):
         '''
         if context is None:
             context = {}
-        print "Context is"
-        print context
         res = super(account_invoice_analytic, self).fields_view_get(
             cr, uid, view_id=view_id,
             view_type=view_type, context=context,
@@ -79,8 +77,6 @@ class account_invoice_analytic(osv.Model):
         ans_ids = ans_obj.search(cr, uid,
                                  [('model_name', '=', 'account_invoice_line')],
                                  context=context)
-        print "ANS IDS"
-        print ans_ids
         ans_br = ans_obj.browse(cr, uid, ans_ids, context=context)
         ans_dict = dict()
         for ans in ans_br:
