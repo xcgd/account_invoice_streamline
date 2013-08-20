@@ -42,7 +42,6 @@ class account_invoice_line_analytic(osv.Model):
             val = getattr(line, key).id
             res[key] = val
         return res
-        
 
 
 class account_invoice_analytic(osv.Model):
@@ -132,9 +131,7 @@ class account_invoice_analytic(osv.Model):
 
             res['fields']['invoice_line'][
                 'views']['tree']['arch'] = etree.tostring(doc)
-
         res = self._delete_sheet(res)
-            
         return res
 
     def line_get_convert(self, cr, uid, x, part, date, context=None):
