@@ -83,7 +83,6 @@ class account_invoice_analytic(osv.Model):
             ans_dict[ans.ordering] = ans.nd_id.name
 
         if 'fields' in res and 'invoice_line' in res['fields']:
-            print "OK"
             doc = etree.XML(
                 res['fields']['invoice_line']['views']['tree']['arch']
             )
