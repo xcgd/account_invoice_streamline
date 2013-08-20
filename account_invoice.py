@@ -49,6 +49,17 @@ class account_invoice_analytic(osv.Model):
     _name = "account.invoice"
     _inherit = "account.invoice"
 
+    def _delete_sheet(self, res):
+        """Delete the 'sheet' element
+        but preserve its content.
+        """
+        tree = etree.XML(res['arch'])
+        sheets = tree.xpath('//sheet')
+        if sheets:
+            etree.strip_tags(tree, 'sheet')
+        res['arch'] = etree.tostring(tree)
+        return res
+
     def fields_view_get(self, cr, uid, view_id=None, view_type=False,
                         context=None, toolbar=False, submenu=False):
         '''
@@ -121,6 +132,9 @@ class account_invoice_analytic(osv.Model):
 
             res['fields']['invoice_line'][
                 'views']['tree']['arch'] = etree.tostring(doc)
+
+        res = self._delete_sheet(res)
+            
         return res
 
     def line_get_convert(self, cr, uid, x, part, date, context=None):
