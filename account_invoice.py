@@ -88,42 +88,14 @@ class account_invoice_analytic(osv.Model):
             )
             line_fields = res['fields']['invoice_line'][
                 'views']['tree']['fields']
-
-            if 'a1_id' in line_fields:
-                line_fields['a1_id']['string'] = ans_dict.get('1', 'A1')
-                doc.xpath("//field[@name='a1_id']")[0].\
-                    set('modifiers', '{"tree_invisible": %s}' %
-                        (str(not '1' in ans_dict).lower())
-                        )
-
-            if 'a2_id' in line_fields:
-                line_fields['a2_id']['string'] = ans_dict.get('2', 'A2')
-                doc.xpath("//field[@name='a2_id']")[0].\
-                    set('modifiers', '{"tree_invisible": %s}' %
-                        (str(not '2' in ans_dict).lower())
-                        )
-
-            if 'a3_id' in line_fields:
-                line_fields['a3_id']['string'] = ans_dict.get('3', 'A3')
-                doc.xpath("//field[@name='a3_id']")[0].\
-                    set('modifiers', '{"tree_invisible": %s}' %
-                        (str(not '3' in ans_dict).lower())
-                        )
-
-            if 'a4_id' in line_fields:
-                line_fields['a4_id']['string'] = ans_dict.get('4', 'A4')
-                doc.xpath("//field[@name='a4_id']")[0].\
-                    set('modifiers', '{"tree_invisible": %s}' %
-                        (str(not '4' in ans_dict).lower())
-                        )
-
-            if 'a5_id' in line_fields:
-                line_fields['a5_id']['string'] = ans_dict.get('5', 'A5')
-                doc.xpath("//field[@name='a5_id']")[0].\
-                    set('modifiers', '{"tree_invisible": %s}' %
-                        (str(not '5' in ans_dict).lower())
-                        )
-
+            for i in range(1, 6):
+                field_name = 'a%s_id' % i
+                if field_name in line_fields:
+                    line_fields[field_name]['string'] = \
+                        ans_dict.get(i, 'A%s' % i)
+                    doc.xpath("//field[@name='%s']" % field_name)[0].\
+                        set('modifiers', '{"tree_invisible": %s}' %
+                            (str(not '%s' % i in ans_dict).lower()))
             res['fields']['invoice_line'][
                 'views']['tree']['arch'] = etree.tostring(doc)
         res = self._delete_sheet(res)
