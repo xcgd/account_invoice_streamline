@@ -92,7 +92,7 @@ class account_invoice_analytic(osv.Model):
                 field_name = 'a%s_id' % i
                 if field_name in line_fields:
                     line_fields[field_name]['string'] = \
-                        ans_dict.get(i, 'A%s' % i)
+                        ans_dict.get('%s' % i, 'A%s' % i)
                     doc.xpath("//field[@name='%s']" % field_name)[0].\
                         set('modifiers', '{"tree_invisible": %s}' %
                             (str(not '%s' % i in ans_dict).lower()))
