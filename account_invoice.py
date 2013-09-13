@@ -10,27 +10,42 @@ class account_invoice_line_analytic(osv.Model):
         'a1_id': fields.many2one(
             'analytic.code',
             "Analysis Code 1",
-            domain=[('nd_id.ns_id.model_name', '=', 'account_invoice_line')]
+            domain=[
+                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
+                ('nd_id.ns_id.ordering', '=', '1'),
+            ]
         ),
         'a2_id': fields.many2one(
             'analytic.code',
             "Analysis Code 2",
-            domain=[('nd_id.ns_id.model_name', '=', 'account_invoice_line')]
+            domain=[
+                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
+                ('nd_id.ns_id.ordering', '=', '2'),
+            ]
         ),
         'a3_id': fields.many2one(
             'analytic.code',
             "Analysis Code 3",
-            domain=[('nd_id.ns_id.model_name', '=', 'account_invoice_line')]
+            domain=[
+                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
+                ('nd_id.ns_id.ordering', '=', '3'),
+            ]
         ),
         'a4_id': fields.many2one(
             'analytic.code',
             "Analysis Code 4",
-            domain=[('nd_id.ns_id.model_name', '=', 'account_invoice_line')]
+            domain=[
+                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
+                ('nd_id.ns_id.ordering', '=', '4'),
+            ]
         ),
         'a5_id': fields.many2one(
             'analytic.code',
             "Analysis Code 5",
-            domain=[('nd_id.ns_id.model_name', '=', 'account_invoice_line')]
+            domain=[
+                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
+                ('nd_id.ns_id.ordering', '=', '5'),
+            ]
         ),
     }
 
