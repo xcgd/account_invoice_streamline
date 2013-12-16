@@ -4,16 +4,20 @@
         <record id="view_account_invoice_streamline_analytic" model="ir.ui.view">
             <field name="name">view.account.invoice.streamline.analytic</field>
             <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="inherit_id" ref="account.invoice_supplier_form" />
             <field name="arch" type="xml">
-                <xpath expr="//notebook/page/field[@name='invoice_line']/tree/field[@name='price_subtotal']" position="after">
-                    <field name="a1_id"/>
-                    <field name="a2_id"/>
-                    <field name="a3_id"/>
-                    <field name="a4_id"/>
-                    <field name="a5_id"/>
+
+                <xpath
+                    expr="//notebook/page/field[@name='invoice_line']/tree/field[@name='price_subtotal']"
+                    position="after">
+                    <field name="a1_id" />
+                    <field name="a2_id" />
+                    <field name="a3_id" />
+                    <field name="a4_id" />
+                    <field name="a5_id" />
                 </xpath>
+
             </field>
-        </record> 
+        </record>
     </data>
 </openerp>
