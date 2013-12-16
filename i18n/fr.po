@@ -1,6 +1,7 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
 #	* account_invoice_streamline
+#	* account
 #
 msgid ""
 msgstr ""
@@ -50,3 +51,7 @@ msgstr "Code Analytique 3"
 msgid "Analysis Code 1"
 msgstr "Code Analytique 1"
 
+#. module: account
+#: view:account.invoice:0
+msgid "Other Info"
+msgstr "Comptabilité"
