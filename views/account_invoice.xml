@@ -17,6 +17,14 @@
                     <field name="a5_id" />
                 </xpath>
 
+                <!-- Make the due date read-only when a payment term is selected. -->
+
+                <xpath expr="//field[@name='date_due']" position="attributes">
+                    <attribute name="attrs"><![CDATA[
+                    {'readonly': [('payment_term', '!=', False)]}
+                    ]]></attribute>
+                </xpath>
+
             </field>
         </record>
     </data>
