@@ -53,6 +53,43 @@ class account_invoice_line_analytic(osv.Model):
         ),
     }
 
+    def fields_get(
+        self, cr, uid, allfields=None, context=None, write_access=True
+    ):
+        """Override this function to rename analytic fields."""
+
+        res = super(account_invoice_line_analytic, self).fields_get(
+            cr, uid, allfields=allfields, context=context,
+            write_access=write_access
+        )
+
+        analytic_osv = self.pool.get('analytic.structure')
+        res = analytic_osv.analytic_fields_get(
+            cr, uid, 'account_invoice_line', res, context=context
+        )
+
+        return res
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        if context is None:
+            context = {}
+
+        res = super(account_invoice_line_analytic, self).fields_view_get(
+            cr, uid, view_id=view_id,
+            view_type=view_type,
+            context=context,
+            toolbar=toolbar,
+            submenu=submenu
+        )
+
+        analytic_osv = self.pool.get('analytic.structure')
+        res = analytic_osv.analytic_fields_view_get(
+            cr, uid, 'account_invoice_line', res, context=context
+        )
+
+        return res
+
     def move_line_get_item(self, cr, uid, line, context=None):
         """Override this function to include analytic fields in generated
         move-line entries.
@@ -93,35 +130,14 @@ class account_invoice_analytic(osv.Model):
             cr, uid, view_id=view_id,
             view_type=view_type, context=context,
             toolbar=toolbar, submenu=False)
-        ans_obj = self.pool.get('analytic.structure')
 
-        # display analysis codes only when present on a related structure,
-        # with dimension name as label
-        ans_ids = ans_obj.search(cr, uid,
-                                 [('model_name', '=', 'account_invoice_line')],
-                                 context=context)
-        ans_br = ans_obj.browse(cr, uid, ans_ids, context=context)
-        ans_dict = dict()
-        for ans in ans_br:
-            ans_dict[ans.ordering] = ans.nd_id.name
-
-        if 'fields' in res and 'invoice_line' in res['fields']:
-            doc = etree.XML(
-                res['fields']['invoice_line']['views']['tree']['arch']
+        if 'invoice_line' in res['fields']:
+            line_tree = res['fields']['invoice_line']['views']['tree']
+            analytic_osv = self.pool.get('analytic.structure')
+            line_tree = analytic_osv.analytic_fields_view_get(
+                cr, uid, 'account_invoice_line', line_tree, context=context
             )
-            line_fields = res['fields']['invoice_line'][
-                'views']['tree']['fields']
-            for i in range(1, 6):
-                field_name = 'a%s_id' % i
-                if field_name in line_fields:
-                    line_fields[field_name]['string'] = \
-                        ans_dict.get('%s' % i, 'A%s' % i)
-                    doc.xpath("//field[@name='%s']" % field_name)[0].\
-                        set('modifiers', '{"tree_invisible": %s}' %
-                            (str(not '%s' % i in ans_dict).lower()))
-            res['fields']['invoice_line'][
-                'views']['tree']['arch'] = etree.tostring(doc)
-        res = self._delete_sheet(res)
+
         return res
 
     def line_get_convert(self, cr, uid, x, part, date, context=None):
