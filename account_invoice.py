@@ -2,105 +2,28 @@ import time
 
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
+from openerp.addons.analytic_structure.MetaAnalytic import MetaAnalytic
 
 from lxml import etree
 
 
 class account_invoice_line_analytic(osv.Model):
+    __metaclass__ = MetaAnalytic
     _name = "account.invoice.line"
     _inherit = "account.invoice.line"
 
-    _columns = {
-        'a1_id': fields.many2one(
-            'analytic.code',
-            "Analysis Code 1",
-            domain=[
-                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
-                ('nd_id.ns_id.ordering', '=', '1'),
-            ]
-        ),
-        'a2_id': fields.many2one(
-            'analytic.code',
-            "Analysis Code 2",
-            domain=[
-                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
-                ('nd_id.ns_id.ordering', '=', '2'),
-            ]
-        ),
-        'a3_id': fields.many2one(
-            'analytic.code',
-            "Analysis Code 3",
-            domain=[
-                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
-                ('nd_id.ns_id.ordering', '=', '3'),
-            ]
-        ),
-        'a4_id': fields.many2one(
-            'analytic.code',
-            "Analysis Code 4",
-            domain=[
-                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
-                ('nd_id.ns_id.ordering', '=', '4'),
-            ]
-        ),
-        'a5_id': fields.many2one(
-            'analytic.code',
-            "Analysis Code 5",
-            domain=[
-                ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
-                ('nd_id.ns_id.ordering', '=', '5'),
-            ]
-        ),
-    }
-
-    def fields_get(
-        self, cr, uid, allfields=None, context=None, write_access=True
-    ):
-        """Override this function to rename analytic fields."""
-
-        res = super(account_invoice_line_analytic, self).fields_get(
-            cr, uid, allfields=allfields, context=context,
-            write_access=write_access
-        )
-
-        analytic_osv = self.pool.get('analytic.structure')
-        res = analytic_osv.analytic_fields_get(
-            cr, uid, 'account_invoice_line', res, context=context
-        )
-
-        return res
-
-    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
-                        context=None, toolbar=False, submenu=False):
-        if context is None:
-            context = {}
-
-        res = super(account_invoice_line_analytic, self).fields_view_get(
-            cr, uid, view_id=view_id,
-            view_type=view_type,
-            context=context,
-            toolbar=toolbar,
-            submenu=submenu
-        )
-
-        analytic_osv = self.pool.get('analytic.structure')
-        res = analytic_osv.analytic_fields_view_get(
-            cr, uid, 'account_invoice_line', res, context=context
-        )
-
-        return res
+    _analytic = 'account_invoice_line'
 
     def move_line_get_item(self, cr, uid, line, context=None):
         """Override this function to include analytic fields in generated
         move-line entries.
         """
-
-        res = super(account_invoice_line_analytic, self)\
-            .move_line_get_item(cr, uid, line, context=context)
-        for i in range(1, 6):
-            key = "a%s_id" % i
-            val = getattr(line, key).id
-            res[key] = val
+        res = super(account_invoice_line_analytic, self).move_line_get_item(
+            cr, uid, line, context
+        )
+        res.update(self.pool['analytic.structure'].extract_values(
+            cr, uid, line, 'account_move_line', context=context
+        ))
         return res
 
 
@@ -130,23 +53,24 @@ class account_invoice_analytic(osv.Model):
             cr, uid, view_id=view_id,
             view_type=view_type, context=context,
             toolbar=toolbar, submenu=False)
+        ans_obj = self.pool.get('analytic.structure')
 
-        if 'invoice_line' in res['fields']:
-            line_tree = res['fields']['invoice_line']['views']['tree']
-            analytic_osv = self.pool.get('analytic.structure')
-            line_tree = analytic_osv.analytic_fields_view_get(
-                cr, uid, 'account_invoice_line', line_tree, context=context
-            )
-
+        line_id_field = res['fields'].get('invoice_line')
+        ans_obj.analytic_fields_subview_get(
+            cr, uid, 'account_invoice_line', line_id_field, context=context
+        )
+        res = self._delete_sheet(res)
         return res
 
     def line_get_convert(self, cr, uid, x, part, date, context=None):
-        res = super(account_invoice_analytic, self)\
-            .line_get_convert(cr, uid, x, part, date, context)
-        for i in range(1, 6):
-            key = "a%s_id" % i
-            val = x.get(key)
-            res[key] = val
+        res = super(account_invoice_analytic, self).line_get_convert(
+            cr, uid, x, part, date, context
+        )
+        res.update(self.pool['analytic.structure'].extract_values(
+            cr, uid, x, 'account_invoice_line',
+            dest_model='account_move_line',
+            context=context
+        ))
         return res
 
     def action_move_create(self, cr, uid, ids, context=None):
