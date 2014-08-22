@@ -309,3 +309,37 @@ class account_invoice_analytic(osv.Model):
             move_obj.post(cr, uid, [move_id], context=ctx)
         self._log_event(cr, uid, ids)
         return True
+
+    def wizard_invoice_cancel(self, cr, uid, ids, context=None):
+        invoices = self.browse(cr, uid, ids, context=context)
+        account_move_obj = self.pool['account.move']
+        
+        if context is None:
+            context = {}
+
+        context['active_ids'] = []
+
+        for invoice in invoices:
+            # Filter the journal type
+            if invoice.journal_id.type == 'situation':
+                raise osv.except_osv(
+                    _(u"Error"),
+                    _(u"You can't reverse a move from a 'situation' journal")
+                )
+            # Only reverse move from 'open' invoices
+            if invoice.state != 'open':
+                continue
+            context['active_ids'].append(invoice.move_id.id)
+
+        if not context['active_ids']:
+            return True
+
+        return {
+            'name': 'Create Move Reversals',
+            'type': 'ir.actions.act_window',
+            'res_model': 'account.move.reversal.create',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': context
+        }

@@ -30,6 +30,12 @@
             <field name="inherit_id" ref="account.invoice_form" />
             <field name="arch" type="xml">
 
+                <!-- We want the button 'Cancel Invoice' to call a function instead of a workflow instance -->
+                <xpath expr="//button[@name='invoice_cancel']" position="attributes">
+                    <attribute name="name">wizard_invoice_cancel</attribute>
+                    <attribute name="type">object</attribute>
+                </xpath>
+
                 <xpath
                     expr="//notebook/page/field[@name='invoice_line']/tree/field[@name='price_subtotal']"
                     position="after">

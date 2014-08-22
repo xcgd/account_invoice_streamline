@@ -15,7 +15,9 @@
     "depends": [
         'base',
         'account_streamline',
-        'analytic_structure'],
+        'analytic_structure',
+        'account_move_reversal',
+    ],
     "data": [
         'views/account_invoice.xml',
     ],
