@@ -334,14 +334,11 @@ class account_invoice_analytic(osv.Model):
         if not context['active_ids']:
             return True
 
-        # I'm not proud of this, we may find better
         # The wizard will call context['post_function'] if it exists,
         # with 'cr' as first parameters. other parameters will be interpreted
         context['post_function_obj'] = 'account.invoice'
         context['post_function_name'] = '_workflow_signal'
         context['post_function_args'] = [ids, 'invoice_cancel']
-        context['post_function_kwargs'] = {}
-
         return {
             'name': 'Create Move Reversals',
             'type': 'ir.actions.act_window',
