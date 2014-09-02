@@ -326,6 +326,12 @@ class account_invoice_analytic(osv.Model):
                     _(u"Error"),
                     _(u"You can't reverse a move from a 'situation' journal")
                 )
+            if not invoice.journal_id.is_reversable:
+                raise osv.except_osv(
+                    _(u"Error"),
+                    _(u"Reversal is not allowed in this journal.")
+                )
+
             # Only reverse move from 'open' invoices
             if invoice.state != 'open':
                 continue
