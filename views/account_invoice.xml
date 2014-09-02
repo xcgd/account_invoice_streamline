@@ -21,6 +21,14 @@
                     ]]></attribute>
                 </xpath>
 
+                <!-- We want the button 'Cancel Invoice' to call a function instead of a workflow instance -->
+                <xpath expr="//button[@name='invoice_cancel']" position="attributes">
+                    <attribute name="name">wizard_invoice_cancel</attribute>
+                    <attribute name="type">object</attribute>
+                    <attribute name="states">draft,proforma2,open</attribute>
+                    <attribute name="groups">account.group_account_user</attribute>
+                </xpath>
+
             </field>
         </record>
 
@@ -34,6 +42,7 @@
                 <xpath expr="//button[@name='invoice_cancel']" position="attributes">
                     <attribute name="name">wizard_invoice_cancel</attribute>
                     <attribute name="type">object</attribute>
+                    <attribute name="groups">account.group_account_user</attribute>
                 </xpath>
 
                 <xpath
