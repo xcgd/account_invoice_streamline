@@ -27,7 +27,7 @@ class account_invoice_line_analytic(osv.Model):
         return res
 
 
-class account_invoice_analytic(osv.Model):
+class account_invoice_streamline(osv.Model):
     _name = "account.invoice"
     _inherit = "account.invoice"
 
@@ -49,7 +49,7 @@ class account_invoice_analytic(osv.Model):
         '''
         if context is None:
             context = {}
-        res = super(account_invoice_analytic, self).fields_view_get(
+        res = super(account_invoice_streamline, self).fields_view_get(
             cr, uid, view_id=view_id,
             view_type=view_type, context=context,
             toolbar=toolbar, submenu=False)
@@ -63,7 +63,7 @@ class account_invoice_analytic(osv.Model):
         return res
 
     def line_get_convert(self, cr, uid, x, part, date, context=None):
-        res = super(account_invoice_analytic, self).line_get_convert(
+        res = super(account_invoice_streamline, self).line_get_convert(
             cr, uid, x, part, date, context
         )
         res.update(self.pool['analytic.structure'].extract_values(
@@ -358,7 +358,7 @@ class account_invoice_analytic(osv.Model):
     def action_cancel(self, cr, uid, ids, context=None):
         state = self.read(cr, uid, ids, ['state'], context=context)[0]['state']
         if state == 'draft':
-            super(account_invoice, self).action_cancel(
+            super(account_invoice_streamline, self).action_cancel(
                 cr, uid, ids, context=context
             )
         return True
