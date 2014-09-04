@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- We need to add an activity between 'open' and 'cancel'
+             so the condition test_paid() is not interpreted in this case-->
+        <record id="act_canceling" model="workflow.activity">
+            <field name="wkf_id" ref="account.wkf" />
+            <field name="name">canceling</field>
+        </record>
+
+        <record id="transition_open_canceling" model="workflow.transition">
+            <field name="act_from" ref="account.act_open" />
+            <field name="act_to" ref="act_canceling" />
+            <field name="signal">invoice_canceling</field>
+        </record>
+
+        <record id="transition_canceling_open" model="workflow.transition">
+            <field name="act_from" ref="act_canceling" />
+            <field name="act_to" ref="account.act_open" />
+            <field name="signal">cancel_canceling</field>
+        </record>
+
+        <record id="account.t12" model="workflow.transition">
+            <field name="act_from" ref="act_canceling" />
+        </record>
+    </data>
+</openerp>

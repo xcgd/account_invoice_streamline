@@ -20,6 +20,7 @@
     ],
     "data": [
         'views/account_invoice.xml',
+        'workflow/account_invoice.xml',
     ],
     #'demo_xml': [],
     'test': [],

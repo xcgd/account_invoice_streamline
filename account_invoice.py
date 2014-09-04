@@ -340,11 +340,18 @@ class account_invoice_streamline(osv.Model):
         if not context['active_ids']:
             return True
 
+        # Change the state so we are sure not to trigger another transition
+        self._workflow_signal(cr, uid, ids, 'invoice_canceling')
+
         # The wizard will call context['post_function'] if it exists,
         # with 'cr' as first parameters. other parameters will be interpreted
         context['post_function_obj'] = 'account.invoice'
         context['post_function_name'] = '_workflow_signal'
         context['post_function_args'] = [ids, 'invoice_cancel']
+        # Same here but this function will be called if there is an error
+        context['post_err_function_obj'] = 'account.invoice'
+        context['post_err_function_name'] = '_workflow_signal'
+        context['post_err_function_args'] = [ids, 'cancel_cancel']
         return {
             'name': 'Create Move Reversals',
             'type': 'ir.actions.act_window',
