@@ -373,6 +373,8 @@ class account_invoice_streamline(osv.Model):
     def action_cancel_draft(self, cr, uid, ids, *args):
         invoices = self.browse(cr, uid, ids)
         for invoice in invoices:
+            if not invoice.move_id:
+                continue
             for line in invoice.move_id.line_id:
                 if line.reconcile_id or line.reconcile_partial_id:
                     raise osv.except_osv(
