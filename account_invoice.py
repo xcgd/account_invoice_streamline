@@ -369,3 +369,17 @@ class account_invoice_streamline(osv.Model):
                 cr, uid, ids, context=context
             )
         return True
+
+    def action_cancel_draft(self, cr, uid, ids, *args):
+        invoices = self.browse(cr, uid, ids)
+        for invoice in invoices:
+            for line in invoice.move_id.line_id:
+                if line.reconcile_id or line.reconcile_partial_id:
+                    raise osv.except_osv(
+                        _(u"Operation not Permitted"),
+                        _(u"Some move lines linked to "
+                          u"this invoice are reconciled.")
+                    )
+        return super(account_invoice_streamline, self).action_cancel_draft(
+            cr, uid, ids, *args
+        )
