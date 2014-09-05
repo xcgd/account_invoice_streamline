@@ -325,7 +325,7 @@ class account_invoice_streamline(osv.Model):
                     _(u"Error"),
                     _(u"You can't reverse a move from a 'situation' journal")
                 )
-            if not invoice.journal_id.is_reversable:
+            if invoice.journal_id.is_not_reversable:
                 raise osv.except_osv(
                     _(u"Error"),
                     _(u"Reversal is not allowed in this journal.")
