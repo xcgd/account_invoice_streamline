@@ -312,8 +312,7 @@ class account_invoice_streamline(osv.Model):
 
     def wizard_invoice_cancel(self, cr, uid, ids, context=None):
         invoices = self.browse(cr, uid, ids, context=context)
-        account_move_obj = self.pool['account.move']
-        
+
         if context is None:
             context = {}
 
@@ -334,6 +333,7 @@ class account_invoice_streamline(osv.Model):
 
             # Only reverse move from 'open' invoices
             if invoice.state != 'open':
+                self._workflow_signal(cr, uid, [invoice.id], 'invoice_cancel')
                 continue
             context['active_ids'].append(invoice.move_id.id)
 
@@ -365,7 +365,7 @@ class account_invoice_streamline(osv.Model):
     def action_cancel(self, cr, uid, ids, context=None):
         state = self.read(cr, uid, ids, ['state'], context=context)[0]['state']
         if state == 'draft':
-            super(account_invoice_streamline, self).action_cancel(
+            return super(account_invoice_streamline, self).action_cancel(
                 cr, uid, ids, context=context
             )
         return True
