@@ -17,6 +17,8 @@ class account_invoice_line_analytic(osv.Model):
             domain=[
                 ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
                 ('nd_id.ns_id.ordering', '=', '1'),
+                ('view_type', '=', False),
+                ('disabled_per_company', '=', False),
             ]
         ),
         'a2_id': fields.many2one(
@@ -25,6 +27,8 @@ class account_invoice_line_analytic(osv.Model):
             domain=[
                 ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
                 ('nd_id.ns_id.ordering', '=', '2'),
+                ('view_type', '=', False),
+                ('disabled_per_company', '=', False),
             ]
         ),
         'a3_id': fields.many2one(
@@ -33,6 +37,8 @@ class account_invoice_line_analytic(osv.Model):
             domain=[
                 ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
                 ('nd_id.ns_id.ordering', '=', '3'),
+                ('view_type', '=', False),
+                ('disabled_per_company', '=', False),
             ]
         ),
         'a4_id': fields.many2one(
@@ -41,6 +47,8 @@ class account_invoice_line_analytic(osv.Model):
             domain=[
                 ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
                 ('nd_id.ns_id.ordering', '=', '4'),
+                ('view_type', '=', False),
+                ('disabled_per_company', '=', False),
             ]
         ),
         'a5_id': fields.many2one(
@@ -49,6 +57,8 @@ class account_invoice_line_analytic(osv.Model):
             domain=[
                 ('nd_id.ns_id.model_name', '=', 'account_invoice_line'),
                 ('nd_id.ns_id.ordering', '=', '5'),
+                ('view_type', '=', False),
+                ('disabled_per_company', '=', False),
             ]
         ),
     }
