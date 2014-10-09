@@ -73,6 +73,11 @@ class account_invoice_streamline(osv.Model):
         ))
         return res
 
+    def _get_object_reference(self, invoice):
+        """ Set the move object reference to account_invoice
+        """
+        return 'account.invoice,%s' % invoice.id
+
     def action_move_create(self, cr, uid, ids, context=None):
         """Creates invoice related analytics and financial move lines.
 
@@ -281,6 +286,7 @@ class account_invoice_streamline(osv.Model):
                 'date': date,
                 'narration': inv.comment,
                 'company_id': inv.company_id.id,
+                'object_reference': self._get_object_reference(inv)
             }
             period_id = inv.period_id and inv.period_id.id or False
             ctx.update(company_id=inv.company_id.id,
