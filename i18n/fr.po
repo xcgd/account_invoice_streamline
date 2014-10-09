@@ -1,20 +1,49 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_streamline
-#	* account
-#
+# * account_invoice_streamline
+# * account
+# Alexandre BRUN, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-26 08:56+0000\n"
-"PO-Revision-Date: 2013-08-26 10:57+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2014-10-09 08:38+0000\n"
+"PO-Revision-Date: 2014-10-09 10:49+0200\n"
+"Last-Translator: Alexandre BRUN <>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:232
+#, python-format
+msgid "Bad Total!"
+msgstr "Mauvais Total!"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:190
+#, python-format
+msgid "No Invoice Lines!"
+msgstr "Aucune ligne de facturation!"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:346
+#, python-format
+msgid "You cannot create an invoice on a centralized journal. Uncheck the centralized counterpart box in the related journal from the configuration menu."
+msgstr ""
+"Vous ne pouvez pas créer une facture sur un journal centralisé. Décochez la "
+"case de contrepartie centralisée dans la revue connexes dans le menu de "
+"configuration."
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:345
+#, python-format
+msgid "User Error!"
+msgstr "Erreur de l'utilisateur!"
 
 #. module: account_invoice_streamline
 #: model:ir.model,name:account_invoice_streamline.model_account_invoice_line
@@ -22,9 +51,55 @@ msgid "Invoice Line"
 msgstr "Ligne Facture"
 
 #. module: account_invoice_streamline
+#: view:account.invoice:0
+msgid "{'readonly': [('payment_term', '!=', False)]}"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:191
+#, python-format
+msgid "Please create some invoice lines."
+msgstr "Créer des lignes de facture s'il vous plaît."
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:182
+#: code:addons/account_invoice_streamline/account_invoice.py:250
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:183
+#, python-format
+msgid "Please define sequence on the journal related to this invoice."
+msgstr ""
+"S'il vous plaît définir la séquence sur le journal relatif à cette facture."
+
+#. module: account_invoice_streamline
 #: model:ir.model,name:account_invoice_streamline.model_account_invoice
 msgid "Invoice"
 msgstr "Facture"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:251
+#, python-format
+msgid "Cannot create the invoice.\n"
+"The related payment term is probably misconfigured as it gives a computed amount greater than the total invoiced amount. In order to avoid rounding issues, the latest line of your payment term must be of type 'balance'."
+msgstr ""
+"Vous ne pouvez pas créer la facture.\n"
+"Le délai de paiement connexe est probablement mal configuré , car il donne "
+"un montant calculé supérieur au montant total de la facture . Afin d'éviter "
+"les problèmes d'arrondi , la dernière ligne de votre délai de paiement doit "
+"être de type «équilibre» "
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:233
+#, python-format
+msgid "Please verify the price of the invoice!\n"
+"The encoded total does not match the computed total."
+msgstr ""
+"S'il vous plaît vérifier le prix de la facture !\n"
+"Le total codée ne correspond pas à la somme calculée."
 
 #. module: account_invoice_streamline
 #: field:account.invoice.line,a4_id:0
@@ -51,7 +126,5 @@ msgstr "Code Analytique 3"
 msgid "Analysis Code 1"
 msgstr "Code Analytique 1"
 
-#. module: account
-#: view:account.invoice:0
-msgid "Other Info"
-msgstr "Comptabilité"
+#~ msgid "Other Info"
+#~ msgstr "Comptabilité"
