@@ -22,7 +22,7 @@ ${css}
         </table>
 
         <div class="date">
-        <p> ${_(u"Fait à Montreuil, le") } ${ order.date_invoice}</p>
+        <p> Fait à Montreuil, le  ${ order.date_invoice}</p>
         </div>
 
     </div>
@@ -49,19 +49,21 @@ ${css}
        <h1 class="text"><u>${ invoice_title }</u></h1>
 </div>
 
-<div class="basic_table" colspan=3>
+<div class="basic_table">
     <center>
     <table class="basic_table">
+    <thead>
         <tr>
-            <th style="width:33%">${_(u"Numéro de Facture")}</td>
-            <th style="width:33%">${_(u"Date de Facturation")}</td>
-            <th style="width:34%">${_(u"Client")}</td>
+            <th style="width:33%">${_(u"Numéro de Facture")}</th>
+            <th style="width:33%">${_(u"Date de Facturation")}</th>
+            <th style="width:34%">${_(u"Client")}</th>
         </tr>
         <tr>
             <td>${order.number or ''}</td>
             <td>${order.date_invoice or ''}</td>
             <td>${order.partner_id.name }</td>
         </tr>
+    </thead>
     </table>
     </center>
 </div>
@@ -87,6 +89,7 @@ ${css}
     %endfor
     </tbody>
     </table>
+
     <table class="totaux">
     <tfoot class="totals">
         <tr>
@@ -104,7 +107,8 @@ ${css}
             <td><b>${_(u"Total TTC")} :</b></td>
             <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_total, currency_obj=order.currency_id) }</td>
         </tr>
-    </tfoot></br></br>
+    </tfoot>
+    </table>
     <br/><br/>
     <table>
     %if order.comment:
@@ -117,8 +121,6 @@ ${css}
 
 
 
-
-</table></br></br>
 %if i < len(objects) - 1:
     <div style="page-break-after:always"></div>
 %endif
