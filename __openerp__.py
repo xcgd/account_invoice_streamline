@@ -14,10 +14,13 @@
     'init_xml': [],
     "depends": [
         'base',
+        'account',
+        'report_webkit',
         'account_streamline',
         'analytic_structure'],
     "data": [
         'views/account_invoice.xml',
+        'report/account_invoice_streamline.xml',
     ],
     #'demo_xml': [],
     'test': [],
