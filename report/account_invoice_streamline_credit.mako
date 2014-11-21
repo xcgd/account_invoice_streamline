@@ -1,17 +1,19 @@
+## -*- coding: utf-8 -*-
 <style type="text/css">
 ${css}
 </style>
 %for i, order in enumerate(objects):
-<%page expression_filter="entity"/>
 <% setLang(order.partner_id.lang) %>
+<%page expression_filter="entity"/>
 <%!
         def formatText(text):
             return '<br />'.join(text.splitlines())
 %>
+
 <div class="address">
     <div class="addressright">
         <table class="recipient">
-            <tr><th class="addresstitle">${ _(u'CLIENT') } :</th></tr>
+        <tr><th class="addresstitle">${ _(u'CLIENT') } :</th></tr>
             %if order.partner_id:
             <tr><td class="name">${order.partner_id.parent_id.name or ''}</td></tr>
             <tr><td class="name">${order.partner_id.title and order.partner_id.title.name or ''} ${order.partner_id.name }</td></tr>
@@ -21,7 +23,7 @@ ${css}
             %endif
         </table>
 
-        <div class="date">
+       <div class="date">
         <p> Fait à Paris, le  ${ order.date_invoice}</p>
         </div>
 
@@ -89,7 +91,7 @@ ${css}
     %endfor
     </tbody>
     </table>
-    <p>&nbsp;</p>
+     <p>&nbsp;</p>
     <table class="totaux">
     <tfoot class="totals">
         <tr>
@@ -109,7 +111,7 @@ ${css}
         </tr>
     </tfoot>
     </table>
-     <p>&nbsp;</p>
+    <br/><br/>
     <table>
     %if order.comment:
         <tr>
@@ -121,6 +123,9 @@ ${css}
 
 
 
+
+
+</table></br></br>
 %if i < len(objects) - 1:
     <div style="page-break-after:always"></div>
 %endif

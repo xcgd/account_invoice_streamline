@@ -366,5 +366,18 @@ ${css}
       usage="default"
     />
 
+    <report
+        id="account.account_invoices_credit"
+        auto="False"
+        file="account_invoice_streamline/report/account_invoice_streamline_credit.mako"
+        model="account.invoice"
+        name="account.invoice.streamline.credit"
+        string="Avoirs"
+        webkit_header="account_invoice_streamline_header"
+        report_type="webkit"
+        usage="default"
+      />
+
+
   </data>
 </openerp>
