@@ -4,7 +4,7 @@
 ##############################################################################
 {
     "name": "Account Invoice Streamline",
-    "version": "1.6",
+    "version": "1.6.1",
     "author": "XCG Consulting",
     "category": 'Accounting',
     "description": """Enhancements to the account
@@ -14,6 +14,8 @@
     'init_xml': [],
     "depends": [
         'base',
+        'account',
+        'report_webkit',
         'account_streamline',
         'analytic_structure',
         'account_move_reversal',
@@ -21,8 +23,8 @@
     "data": [
         'views/account_invoice.xml',
         'workflow/account_invoice.xml',
+        'report/account_invoice_streamline.xml',
     ],
-    #'demo_xml': [],
     'test': [],
     'installable': True,
     'active': False,

@@ -1,123 +1,188 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* account_invoice_streamline
-#
+# 	* account_invoice_streamline
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-05 13:28+0000\n"
-"PO-Revision-Date: 2014-09-05 13:28+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2014-11-24 09:44+0000\n"
+"PO-Revision-Date: 2014-11-24 10:47+0100\n"
+"Last-Translator: Houzéfa Abbasbhay <houzefa.abba@xcg-consulting.fr>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:325
-#: code:addons/account_invoice_streamline/account_invoice.py:330
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:75
+msgid "Produit"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:170
 #, python-format
-msgid "Error"
-msgstr "Erreur"
+msgid ""
+"Cannot create the invoice.\n"
+"The related payment term is probably misconfigured as it gives a computed "
+"amount greater than the total invoiced amount. In order to avoid rounding "
+"issues, the latest line of your payment term must be of type 'balance'."
+msgstr ""
+"Impossible de créer la facture.\n"
+"Le montant calculé via la méthode de paiement est plus grand que le montant "
+"total de la facture. Pour éviter des problèmes d'arrondis, la derniére ligne "
+"de la méthode de paiement doit être du type 'balance'."
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:326
+#: code:addons/account_invoice_streamline/account_invoice.py:332
 #, python-format
 msgid "You can't reverse a move from a 'situation' journal"
-msgstr "Vous ne pouvez pas extourner une pièce comptable d'un journal de situation Ouverture/Clôture."
+msgstr ""
+"Vous ne pouvez pas extourner une pièce comptable d'un journal de situation "
+"Ouverture/Clôture."
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:105
+#: code:addons/account_invoice_streamline/account_invoice.py:110
 #, python-format
 msgid "Please create some invoice lines."
 msgstr "Merci de créer des lignes de facture."
 
 #. module: account_invoice_streamline
-#: view:account.invoice:0
-msgid "wizard_invoice_cancel"
-msgstr "wizard_invoice_cancel"
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:118
+msgid "Informations complémentaires"
+msgstr ""
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:380
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:76
+msgid "Description"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:77
+msgid "Quantité"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:79
+msgid "Montant HT "
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:388
 #, python-format
 msgid "Some move lines linked to this invoice are reconciled."
-msgstr "Impossible de mettre en brouillon, des écritures concernant cette facture sont lettrées."
+msgstr ""
+"Impossible de mettre en brouillon, des écritures concernant cette facture "
+"sont lettrées."
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:97
+#: code:addons/account_invoice_streamline/account_invoice.py:102
 #, python-format
 msgid "Please define sequence on the journal related to this invoice."
 msgstr "Merci de définir une séquence sur le journal de cette facture."
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:379
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:99
+msgid "Total HT "
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:387
 #, python-format
 msgid "Operation not Permitted"
 msgstr "Opération Interdite"
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:146
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:59
+msgid "Numéro de Facture"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:151
 #, python-format
 msgid "Bad Total!"
-msgstr "Mauvais Total!"
+msgstr "Mauvais total !"
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:104
+#: code:addons/account_invoice_streamline/account_invoice.py:109
 #, python-format
 msgid "No Invoice Lines!"
-msgstr "Pas de ligne de facture!"
+msgstr "Aucune ligne de facture !"
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:331
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:109
+msgid "Total TTC"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:337
 #, python-format
 msgid "Reversal is not allowed in this journal."
 msgstr "L'extourne n'est pas autorisée dans ce journal."
 
 #. module: account_invoice_streamline
-#: view:account.invoice:0
-msgid "object"
-msgstr "object"
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:104
+msgid "Total TVA"
+msgstr ""
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:147
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:78
+msgid "Prix Unitaire"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:152
 #, python-format
-msgid "Please verify the price of the invoice!\n"
+msgid ""
+"Please verify the price of the invoice!\n"
 "The encoded total does not match the computed total."
-msgstr "Merci de vérifier le montant de la factureLe total codé ne correspond pas au montant total calculé."
+msgstr ""
+"Merci de vérifier le montant de la facture.\n"
+"Le total codé ne correspond pas au montant total calculé."
 
 #. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:260
-#, python-format
-msgid "You cannot create an invoice on a centralized journal. Uncheck the centralized counterpart box in the related journal from the configuration menu."
-msgstr "Vous ne pouvez pas créer une facture dans un journal centralisé. Décochez la case 'Contrepartie centralisée' du journal concerné dans le menu de configuration."
-
-#. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:259
-#, python-format
-msgid "User Error!"
-msgstr "Erreur utilisateur!"
-
-#. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:165
-#, python-format
-msgid "Cannot create the invoice.\n"
-"The related payment term is probably misconfigured as it gives a computed amount greater than the total invoiced amount. In order to avoid rounding issues, the latest line of your payment term must be of type 'balance'."
-msgstr "Impossible de créer la facture.\n"
-"Le montant calculé via la méthode de paiement est plus grand que le montant total de la facture. Pour éviter des problèmes d'arrondis, la derniére ligne de la méthode de paiement doit être du type 'balance'."
-
-#. module: account_invoice_streamline
-#: view:account.invoice:0
-msgid "{'readonly': [('payment_term', '!=', False)]}"
-msgstr "{'readonly': [('payment_term', '!=', False)]}"
-
-#. module: account_invoice_streamline
-#: code:addons/account_invoice_streamline/account_invoice.py:96
-#: code:addons/account_invoice_streamline/account_invoice.py:164
+#: code:addons/account_invoice_streamline/account_invoice.py:101
+#: code:addons/account_invoice_streamline/account_invoice.py:169
 #, python-format
 msgid "Error!"
-msgstr "Erreur!"
+msgstr "Erreur !"
+
+#. module: account_invoice_streamline
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:61
+msgid "Client"
+msgstr ""
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:264
+#, python-format
+msgid "User Error!"
+msgstr "Erreur de l'utilisateur !"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:331
+#: code:addons/account_invoice_streamline/account_invoice.py:336
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: account_invoice_streamline
+#: code:addons/account_invoice_streamline/account_invoice.py:265
+#, python-format
+msgid ""
+"You cannot create an invoice on a centralized journal. Uncheck the "
+"centralized counterpart box in the related journal from the configuration "
+"menu."
+msgstr ""
+"Vous ne pouvez pas créer une facture dans un journal centralisé. Décochez la "
+"case 'Contrepartie centralisée' du journal concerné dans le menu de "
+"configuration."
+
+#. module: account_invoice_streamline
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:60
+msgid "Date de Facturation"
+msgstr ""
 
 #. module: account_invoice_streamline
 #: model:ir.model,name:account_invoice_streamline.model_account_invoice_line
@@ -125,15 +190,13 @@ msgid "Invoice Line"
 msgstr "Lignes de facture"
 
 #. module: account_invoice_streamline
-#: view:account.invoice:0
-msgid "account.group_account_user"
-msgstr "account.group_account_user"
+#: report:addons/account_invoice_streamline/report/account_invoice_streamline_credit.mako:16
+msgid "CLIENT"
+msgstr ""
 
 #. module: account_invoice_streamline
-#: field:account.invoice.line,a1_id:0
-#: field:account.invoice.line,a2_id:0
-#: field:account.invoice.line,a3_id:0
-#: field:account.invoice.line,a4_id:0
+#: field:account.invoice.line,a1_id:0 field:account.invoice.line,a2_id:0
+#: field:account.invoice.line,a3_id:0 field:account.invoice.line,a4_id:0
 #: field:account.invoice.line,a5_id:0
 msgid "Generated Analytic Field"
 msgstr "Champs analytic généré"
@@ -143,8 +206,26 @@ msgstr "Champs analytic généré"
 msgid "Invoice"
 msgstr "Facture"
 
-#. module: account_invoice_streamline
-#: view:account.invoice:0
-msgid "draft,proforma2,open"
-msgstr "draft,proforma2,open"
+#~ msgid "wizard_invoice_cancel"
+#~ msgstr "wizard_invoice_cancel"
 
+#~ msgid "object"
+#~ msgstr "object"
+
+#~ msgid "account.group_account_user"
+#~ msgstr "account.group_account_user"
+
+#~ msgid "Analysis Code 4"
+#~ msgstr "Code Analytique 4"
+
+#~ msgid "Analysis Code 5"
+#~ msgstr "Code Analytique 5"
+
+#~ msgid "Analysis Code 2"
+#~ msgstr "Code Analytique 2"
+
+#~ msgid "Analysis Code 3"
+#~ msgstr "Code Analytique 3"
+
+#~ msgid "Analysis Code 1"
+#~ msgstr "Code Analytique 1"
