@@ -141,12 +141,10 @@ class account_invoice_streamline(osv.Model):
             if group_check_total and uid in [
                 x.id for x in group_check_total.users
             ]:
-                if (inv.type in ('in_invoice', 'in_refund') and
-                    (
-                        abs(inv.check_total - inv.amount_total) >=
-                        (inv.currency_id.rounding / 2.0)
-                    )
-                ):
+                if (inv.type in ('in_invoice', 'in_refund') and (
+                    abs(inv.check_total - inv.amount_total) >=
+                    (inv.currency_id.rounding / 2.0)
+                )):
                     raise osv.except_osv(
                         _('Bad Total!'),
                         _(
@@ -226,10 +224,12 @@ class account_invoice_streamline(osv.Model):
                         'price': t[1],
                         'account_id': acc_id,
                         'date_maturity': t[0],
-                        'amount_currency': diff_currency_p \
-                                and amount_currency or False,
-                        'currency_id': diff_currency_p \
-                                and inv.currency_id.id or False,
+                        'amount_currency': (
+                            diff_currency_p and amount_currency or False
+                        ),
+                        'currency_id': (
+                            diff_currency_p and inv.currency_id.id or False
+                        ),
                         'ref': ref,
                     })
             else:
@@ -239,11 +239,13 @@ class account_invoice_streamline(osv.Model):
                     'price': total,
                     'account_id': acc_id,
                     'date_maturity': inv.date_due or False,
-                    'amount_currency': diff_currency_p \
-                            and total_currency or False,
-                    'currency_id': diff_currency_p \
-                            and inv.currency_id.id or False,
-                    'ref': ref
+                    'amount_currency': (
+                        diff_currency_p and total_currency or False
+                    ),
+                    'currency_id': (
+                        diff_currency_p and inv.currency_id.id or False
+                    ),
+                    'ref': ref,
                 })
 
             date = inv.date_invoice or time.strftime('%Y-%m-%d')
@@ -272,7 +274,8 @@ class account_invoice_streamline(osv.Model):
             line = self.finalize_invoice_move_lines(cr, uid, inv, line)
 
             move_ref = inv.reference and inv.reference or inv.name
-            if (inv.type in ('in_invoice', 'in_refund') and
+            if (
+                inv.type in ('in_invoice', 'in_refund') and
                 inv.supplier_invoice_number
             ):
                 # Use the reference of this invoice as the reference of

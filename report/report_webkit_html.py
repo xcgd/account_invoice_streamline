@@ -22,45 +22,52 @@
 
 import time
 from report import report_sxw
-from osv import osv
 from report_webkit.webkit_report import WebKitParser
-from openerp.tools.translate import _
 
 
 class report_webkit_html(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
-        super(report_webkit_html, self).__init__(cr, uid, name, context=context)
+        super(report_webkit_html, self).__init__(
+            cr, uid, name, context=context
+        )
         self.localcontext.update({
-            'time': time,
             'cr': cr,
+            'time': time,
             'uid': uid,
-
         })
 
 
 class report_webkit_html_invoice(report_webkit_html):
     def __init__(self, cr, uid, name, context):
-        super(report_webkit_html_invoice, self).__init__(cr, uid, name, context=context)
+        super(report_webkit_html_invoice, self).__init__(
+            cr, uid, name, context=context
+        )
         self.localcontext.update({
             'invoice_title': u'FACTURE CLIENT',
         })
 
 
 class report_webkit_html_credit(report_webkit_html):
-	def __init__(self, cr, uid, name, context):
-		super(report_webkit_html_credit, self).__init__(cr, uid, name, context=context)
-                # TODO change to use invoice_type
-		self.localcontext.update({
-			'invoice_title': u'AVOIR CLIENT',
-		})
+    def __init__(self, cr, uid, name, context):
+        super(report_webkit_html_credit, self).__init__(
+            cr, uid, name, context=context
+        )
+        # TODO change to use invoice_type
+        self.localcontext.update({
+            'invoice_title': u'AVOIR CLIENT',
+        })
 
 
-WebKitParser('report.account.invoice.streamline',
-                       'account.invoice',
-                       'account_invoice_streamline/report/account_invoice_streamline.mako',
-                       parser=report_webkit_html_invoice)
+WebKitParser(
+    'report.account.invoice.streamline',
+    'account.invoice',
+    'account_invoice_streamline/report/account_invoice_streamline.mako',
+    parser=report_webkit_html_invoice
+)
 
-WebKitParser('report.account.invoice.streamline.credit',
-                       'account.invoice',
-                       'account_invoice_streamline/report/account_invoice_streamline_credit.mako',
-                       parser=report_webkit_html_credit)
+WebKitParser(
+    'report.account.invoice.streamline.credit',
+    'account.invoice',
+    'account_invoice_streamline/report/account_invoice_streamline_credit.mako',
+    parser=report_webkit_html_credit
+)
