@@ -1,0 +1,58 @@
+account_invoice_streamline 1.6.1
+
+- Create template for Credits Invoices.
+- Modify account_invoice Template streamline.
+
+account_invoice_streamline 1.4.0.3 (merged in 1.6.1)
+
+- Enlarge invoice forms by removing the <sheet> tag (override whole forms in order to do so)
+
+account_invoice_streamline 1.4.0.2 (merged in 1.6.1)
+
+- [l10n] Mise à jour des traductions en Francais.
+
+account_invoice_streamline 1.4.0.1 (merged in 1.6.1)
+
+- Ajouter conditions dans les vues type et annulation pour la société sur les codes analytiques .
+
+account_invoice_streamline 1.6
+
+Production release
+
+account_invoice_streamline 1.5.5
+
+- Remplir la référence de l'objet avec l'id de la facture 
+- Maintenant le bouton qui appelle le wizard est un nouveau bouton.
+
+account_invoice_streamline 1.5.4
+
+- Vérifier si un move est lié avec de vérifier si les lignes sont réconciliés.
+
+account_invoice_streamline 1.5.3
+
+
+- La colonne account_move_reversal a changer de nom.
+- Remplacer la fonction de réinitialisation du workflow de la facture . Nous contournons son comportement dans le cas d'une facture inversée .
+- Réinitialiser comportement par défaut sur ​​l'annulation des factures brouillon.
+- [l10n] Update French translations
+
+account_invoice_streamline 1.5.2.post1
+
+- [l10n]  Mise à jour des traductions en Francais.
+- Modification du workflow. Ajout d'une fonction d'erreur quand il y a inversion.
+
+account_invoice_streamline 1.5
+
+- Ajout d'un groupe sur le bouton Annuler des factures.
+- Ajouter un contrôle pour vérifier si le journal est réversible .
+- Remplacement de l'activité de invoice_cancel et ajoute d'un appel de fonction après le wizard de account.move.reversal  ( avec la fonctionnalité étonnante ) .
+- Ajout d'un assistant entre le clic sur le bouton " Annuler la facture » et la transition de workflow afin que nous puissions inverser le mouvement associé à la facture .
+- Mise à jour de account_invoice_streamline pour la nouvelle version de structure analytique.
+
+account_invoice_streamline 1.4
+
+- Ajout des champs analytiques pour la vue de la Facture Client. Ces champs utilisent les méthodes définis dans analytique structure.
+
+account_invoice_streamline 1.3
+
+
