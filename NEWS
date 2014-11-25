@@ -1,0 +1,57 @@
+account_invoice_streamline 1.6.1
+
+- Create template for Credits Invoices.
+- Modify account_invoice Template streamline.
+
+account_invoice_streamline 1.4.0.3 (merged in 1.6.1)
+
+- Enlarge invoice forms by removing the <sheet> tag (override whole forms in order to do so)
+
+account_invoice_streamline 1.4.0.2 (merged in 1.6.1)
+
+- [l10n] Update French translations
+
+account_invoice_streamline 1.4.0.1 (merged in 1.6.1)
+
+- Added conditions view type and disabled by company on analytic codes.
+
+account_invoice_streamline 1.6
+
+Production release
+
+account_invoice_streamline 1.5.5
+
+- Fill the object reference with the invoice id.
+- Now the button that call the wizard is a new button.
+
+account_invoice_streamline 1.5.4
+
+- Check if a move is linked before checking if lines are reconciled.
+
+account_invoice_streamline 1.5.3
+
+- account_move_reversal column changed name.
+- Override the function that reset the invoice workflow. We bypass its behaviour in case of a reversed invoice.
+- Reset default behaviour on canceling draft invoices.
+- [l10n] Update French translations
+
+account_invoice_streamline 1.5.2.post1
+
+- [l10n] Update French translations
+- Modifying the workflow. Add error function when reversal
+
+account_invoice_streamline 1.5
+
+- Add groups on button invoice cancel.
+- Add a check to check if the journal is reversable.
+- Override the invoice_cancel activity and add a function call after the wizard account.move.reversal (with the amazing functionality).
+- Add a wizard between the click on the button "Cancel invoice" and the workflow transition so we can reverse the move associated with the invoice.
+- Updated account_invoice_streamline for the new version of analytic_structure.
+
+account_invoice_streamline 1.4
+
+- Added analytic fields to the Customer Invoices view. Analytic fields use the methods defined in analytic_structure.
+
+account_invoice_streamline 1.3
+
+
