@@ -312,8 +312,30 @@ ${css}
 %endfor
 </body>
 </html>
+]]></field>
+        <field name="footer_html"><![CDATA[
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+<style type="text/css">
+${css}
+.footer {
+    border-top: 1px solid grey;
+    text-align: center;
+    font-size:10px;
+    page-break-after:always;
+    }
+</style>
+<body>
+%for object in objects:
+<div class="footer">
+    <p>${object.company_id.rml_footer_readonly}</p>
+</div>
+%endfor
+</body>
+</html>
 ]]>
-        </field>
+</field>
 
     </record>
 
