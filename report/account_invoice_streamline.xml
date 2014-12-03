@@ -144,7 +144,7 @@ h1, h2 {
 
 .address .shipping{
     margin-top:10px;
-    margin-left:10px;
+    margin-left:40px;
     }
 
 .address .recipient {
@@ -262,25 +262,10 @@ text_align:center;
 font-size:12px;
 }
 
-.note,
-.footer {
-    margin: 20px auto;
-    text-align: center;
-    }
-
 .note {
     font-size: 12px;
     font-weight: bold;
     text-decoration: underline;
-}
-
-
-.footer {
-    border-top: 1px solid grey;
-}
-
-.footertext {
-    font-size:10px;
 }
 
 .tkt {
@@ -330,28 +315,6 @@ ${css}
 ]]>
         </field>
 
-        <field name="footer_html"><![CDATA[
-<html>
-<head>
-<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
-<style type="text/css">
-${css}
-</style>
-<body>
-<center>
-<div class="tkt">
-<p>FORMIRIS<br>
- Tél. : 02.99.14.33.44 / Email: formirisbretagne@formiris-ecbretagne.org <br>
- Website: www.formiris-ecbretagne.org<br>
- Contact: LAIRY PEREZ Thérèse</p>
-</div>
-</center>
-</body>
-</html>
-]]></field>
-
-
-
     </record>
 
     <report
@@ -367,11 +330,11 @@ ${css}
     />
 
     <report
-        id="account.account_invoices_credit"
+        id="account.account_invoice_credit"
         auto="False"
-        file="account_invoice_streamline/report/account_invoice_streamline_credit.mako"
+        file="account_invoice_streamline/report/account_invoice_streamline.mako"
         model="account.invoice"
-        name="account.invoice.streamline.credit"
+        name="account.invoice.streamline"
         string="Avoirs"
         webkit_header="account_invoice_streamline_header"
         report_type="webkit"

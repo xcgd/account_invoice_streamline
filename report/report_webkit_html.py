@@ -43,31 +43,12 @@ class report_webkit_html_invoice(report_webkit_html):
             cr, uid, name, context=context
         )
         self.localcontext.update({
-            'invoice_title': u'FACTURE CLIENT',
+            'invoice_type': 'normal',
         })
-
-
-class report_webkit_html_credit(report_webkit_html):
-    def __init__(self, cr, uid, name, context):
-        super(report_webkit_html_credit, self).__init__(
-            cr, uid, name, context=context
-        )
-        # TODO change to use invoice_type
-        self.localcontext.update({
-            'invoice_title': u'AVOIR CLIENT',
-        })
-
 
 WebKitParser(
     'report.account.invoice.streamline',
     'account.invoice',
     'account_invoice_streamline/report/account_invoice_streamline.mako',
     parser=report_webkit_html_invoice
-)
-
-WebKitParser(
-    'report.account.invoice.streamline.credit',
-    'account.invoice',
-    'account_invoice_streamline/report/account_invoice_streamline_credit.mako',
-    parser=report_webkit_html_credit
 )

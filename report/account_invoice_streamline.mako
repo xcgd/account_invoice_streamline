@@ -11,7 +11,20 @@ ${css}
 <div class="address">
     <div class="addressright">
         <table class="recipient">
-            <tr><th class="addresstitle">${ _(u'CLIENT') } :</th></tr>
+            %if invoice_type == 'normal':
+    %if order.type == 'in_refund':
+	       <tr><th class="addresstitle">${ _(u"FOURNISSEUR") } :</th></tr>
+    %endif
+    %if order.type == 'out_refund':
+	       <tr><th class="addresstitle">${ _(u"CLIENT") } :</th></tr>
+    %endif
+    %if order.type == 'in_invoice':
+            <tr><th class="addresstitle">${ _(u"FOURNISSEUR") } :</th></tr>
+    %endif
+    %if order.type == 'out_invoice':
+            <tr><th class="addresstitle">${ _(u"CLIENT") } :</th></tr>
+    %endif
+%endif
             %if order.partner_id:
             <tr><td class="name">${order.partner_id.parent_id.name or ''}</td></tr>
             <tr><td class="name">${order.partner_id.title and order.partner_id.title.name or ''} ${order.partner_id.name }</td></tr>
@@ -46,7 +59,20 @@ ${css}
 </div>
 
 <div class="orderinfo">
-       <h1 class="text"><u>${ invoice_title }</u></h1>
+    %if invoice_type == 'normal':
+    %if order.type == 'in_refund':
+	       <h1 class="text">${_(u"Avoir fournisseur") }</h1>
+    %endif
+    %if order.type == 'out_refund':
+	       <h1 class="text">${_(u"Avoir client") }</h1>
+    %endif
+	%if order.type == 'in_invoice':
+	       <h1 class="text">${_(u"Facture Fournisseur") }</h1>
+	%endif
+	%if order.type == 'out_invoice':
+	       <h1 class="text">${_(u"Facture client") }</h1>
+	%endif
+%endif
 </div>
 
 <div class="basic_table">
@@ -54,9 +80,29 @@ ${css}
     <table class="basic_table">
     <thead>
         <tr>
-            <th style="width:33%">${_(u"Numéro de Facture")}</th>
-            <th style="width:33%">${_(u"Date de Facturation")}</th>
-            <th style="width:34%">${_(u"Client")}</th>
+%if invoice_type == 'normal':
+    %if order.type == 'in_refund':
+        <th>${_(u"Numéro d'avoir")}</th>
+        <th>${_(u"Date d'avoir")}</th>
+        <th>${_(u"Fournisseur")}</th>
+    %endif
+    %if order.type == 'out_refund':
+        <th>${_(u"Numéro d'avoir")}</th>
+        <th>${_(u"Date d'avoir")}</th>
+        <th>${_(u"Client")}</th>
+    %endif
+    %if order.type == 'in_invoice':
+        <th>${_(u"Numéro de facture")}</th>
+        <th>${_(u"Date de Facturation")}</th>
+        <th>${_(u"Fournisseur")}</th>
+
+	%endif
+	%if order.type == 'out_invoice':
+	    <th>${_(u"Numéro de facture")}</th>
+        <th>${_(u"Date de facturation")}</th>
+        <th>${_(u"Client")}</th>
+	%endif
+%endif
         </tr>
         <tr>
             <td>${order.number or ''}</td>
@@ -82,9 +128,9 @@ ${css}
         <tr class="line">
             <td>${ line.product_id.name or ''}</td>
             <td style="text-align:center">${ line.name or '' }</td>
-            <td class="amount" width="8%" style="text-align:center">${ line.quantity }</td>
-            <td class="amount" width="12%" style="text-align:center">${ formatLang(line.price_unit, currency_obj=order.currency_id) }</td>
-            <td class="amount" width="14%" style="text-align:center">${ formatLang(line.price_subtotal, currency_obj=order.currency_id) }</td>
+            <td class="amount" width="8%" style="text-align:center">${ line.quantity or '' }</td>
+            <td class="amount" width="12%" style="text-align:center">${ formatLang(line.price_unit, currency_obj=order.currency_id or '') }</td>
+            <td class="amount" width="14%" style="text-align:center">${ formatLang(line.price_subtotal, currency_obj=order.currency_id or '') }</td>
         </tr>
     %endfor
     </tbody>
@@ -95,17 +141,17 @@ ${css}
         <tr>
             <td colspan="4"/>
             <td><b>${_(u"Total HT ") } :</b></td>
-            <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_untaxed, currency_obj=order.currency_id) }</td>
+            <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_untaxed, currency_obj=order.currency_id or '') }</td>
         </tr>
         <tr>
             <td colspan="4"/>
             <td><b>${_(u"Total TVA")} :</b></td>
-            <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_tax, currency_obj=order.currency_id) }</td>
+            <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_tax, currency_obj=order.currency_id or '') }</td>
         </tr>
         <tr>
             <td colspan="4"/>
             <td><b>${_(u"Total TTC")} :</b></td>
-            <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_total, currency_obj=order.currency_id) }</td>
+            <td class="amount" style="white-space:nowrap">${ formatLang(order.amount_total, currency_obj=order.currency_id or '') }</td>
         </tr>
     </tfoot>
     </table>
@@ -113,14 +159,14 @@ ${css}
     <table>
     %if order.comment:
         <tr>
-            <p class="descriptif"><u>${_(u"Informations complémentaires" or '') }</u></p>
-            <p class="comment">${order.comment|formatText} </p>
+            <p class="descriptif"><u>${_(u"Informations complémentaires") }</u></p>
+            <p class="comment">${order.comment|formatText or ''} </p>
         </tr>
         %endif
     </table>
 
 
-
+<!--FIXME Resolve multi footer -->
 %if i < len(objects) - 1:
     <div style="page-break-after:always"></div>
 %endif
