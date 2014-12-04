@@ -1,3 +1,7 @@
+account_invoice_streamline 1.6.2
+
+- Update Templates for Invoices regarding to In_invoice/Out_invoice and In_refund/Out_refund
+
 account_invoice_streamline 1.6.1
 
 - Create template for Credits Invoices.

@@ -1,3 +1,7 @@
+account_invoice_streamline 1.6.2
+
+- Mise à jour des templates de Factures en fonction des types CLient/Fournisseur et Facture/avoir.
+
 account_invoice_streamline 1.6.1
 
 - Create template for Credits Invoices.
