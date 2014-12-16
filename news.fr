@@ -1,3 +1,7 @@
+account_invoice_streamline 1.6.3
+
+- Mise à jour du template Facture Fournisseur. Le numéro de facture ne cible plus le numéro interne de la facture mais le numéro de facture fournisseur.
+
 account_invoice_streamline 1.6.2
 
 - Mise à jour des templates de Factures en fonction des types CLient/Fournisseur et Facture/avoir.
