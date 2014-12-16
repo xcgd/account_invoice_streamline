@@ -1,3 +1,7 @@
+account_invoice_streamline 1.6.3
+
+- Update Template for Supplier Invoices. Replace the number of Invoice by the number of Supplier Invoice.
+
 account_invoice_streamline 1.6.2
 
 - Update Templates for Invoices regarding to In_invoice/Out_invoice and In_refund/Out_refund
