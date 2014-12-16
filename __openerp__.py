@@ -4,7 +4,7 @@
 ##############################################################################
 {
     "name": "Account Invoice Streamline",
-    "version": "1.6.2",
+    "version": "1.6.3",
     "author": "XCG Consulting",
     "category": 'Accounting',
     "description": """Enhancements to the account
