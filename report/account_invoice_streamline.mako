@@ -105,9 +105,29 @@ ${css}
 %endif
         </tr>
         <tr>
-            <td>${order.number or ''}</td>
-            <td>${order.date_invoice or ''}</td>
-            <td>${order.partner_id.name }</td>
+%if invoice_type == 'normal':
+    %if order.type == 'in_refund':
+        <td>${order.number or ''}</td>
+        <td>${order.date_invoice or ''}</td>
+        <td>${order.partner_id.name }</td>
+    %endif
+    %if order.type == 'out_refund':
+        <td>${order.number or ''}</td>
+        <td>${order.date_invoice or ''}</td>
+        <td>${order.partner_id.name }</td>
+    %endif
+    %if order.type == 'in_invoice':
+        <td>${order.supplier_invoice_number or ''}</td>
+        <td>${order.date_invoice or ''}</td>
+        <td>${order.partner_id.name }</td>
+
+	%endif
+	%if order.type == 'out_invoice':
+	    <td>${order.number or ''}</td>
+        <td>${order.date_invoice or ''}</td>
+        <td>${order.partner_id.name }</td>
+	%endif
+%endif
         </tr>
     </thead>
     </table>
