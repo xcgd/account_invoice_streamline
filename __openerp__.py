@@ -4,13 +4,13 @@
 ##############################################################################
 {
     "name": "Account Invoice Streamline",
-    "version": "1.6.4",
+    "version": "1.7",
     "author": "XCG Consulting",
     "category": 'Accounting',
     "description": """Enhancements to the account
     invoice module to streamline its usage.
     """,
-    'website': 'http://www.openerp-experts.com',
+    'website': 'http://odoo.consulting/',
     'init_xml': [],
     "depends": [
         'base',
