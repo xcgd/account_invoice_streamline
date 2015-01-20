@@ -1,6 +1,7 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
 # 	* account_invoice_streamline
+#   * account
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
@@ -205,6 +206,11 @@ msgstr "Champs analytic généré"
 #: model:ir.model,name:account_invoice_streamline.model_account_invoice
 msgid "Invoice"
 msgstr "Facture"
+
+#. module: account
+#: view:account.invoice:0
+msgid "Reverse Invoice"
+msgstr "Extourner"
 
 #~ msgid "wizard_invoice_cancel"
 #~ msgstr "wizard_invoice_cancel"

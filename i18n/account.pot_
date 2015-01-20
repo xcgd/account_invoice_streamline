@@ -1,0 +1,6 @@
+#   * account
+
+#. module: account
+#: view:account.invoice:0
+msgid "Reverse Invoice"
+msgstr ""
