@@ -21,8 +21,8 @@
 ##############################################################################
 
 import time
-from report import report_sxw
-from report_webkit.webkit_report import WebKitParser
+from openerp.report import report_sxw
+from openerp.addons.report_webkit.webkit_report import WebKitParser
 
 
 class report_webkit_html(report_sxw.rml_parse):
