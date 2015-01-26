@@ -12,7 +12,7 @@ class account_invoice_line_analytic(models.Model):
     _name = "account.invoice.line"
     _inherit = "account.invoice.line"
 
-    _analytic = 'account_invoice_line'
+    _analytic = True
 
     @api.model
     def move_line_get_item(self, line):
@@ -44,14 +44,14 @@ class account_invoice_streamline(models.Model):
         return res
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
         """ Display analysis code in account move lines trees
         """
         res = super(account_invoice_streamline, self).fields_view_get(
             view_id=view_id,
             view_type=view_type,
             toolbar=toolbar,
-            submenu=False
+            submenu=submenu,
         )
         ans_obj = self.env['analytic.structure']
 
