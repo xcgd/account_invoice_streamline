@@ -20,10 +20,7 @@ class account_invoice_line_analytic(models.Model):
         move-line entries.
         """
         res = super(account_invoice_line_analytic, self).move_line_get_item(line)
-        print self.env['analytic.structure'].extract_values(
-            self._cr, self._uid, line, 'account_move_line', context=self._context
-        )
-        print res
+        res.update(self.env['analytic.structure'].extract_values(line, 'account_move_line'))
         return res
 
 
