@@ -14,14 +14,6 @@ class account_invoice_line_analytic(models.Model):
 
     _analytic = True
 
-    @api.model
-    def move_line_get_item(self, line):
-        """Override this function to include analytic fields in generated
-        move-line entries.
-        """
-        res = super(account_invoice_line_analytic, self).move_line_get_item(line)
-        res.update(self.env['analytic.structure'].extract_values(line, 'account_move_line'))
-        return res
 
 
 class account_invoice_streamline(models.Model):
