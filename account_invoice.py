@@ -182,8 +182,6 @@ class account_invoice_streamline(models.Model):
 
             part = self.env['res.partner']._find_accounting_partner(inv.partner_id)
 
-            for l in iml:
-                print l
             line = [(0, 0, self.line_get_convert(l, part.id, date)) for l in iml]
             line = inv.group_lines(iml, line)
 
