@@ -12,7 +12,19 @@ class account_invoice_line_analytic(models.Model):
     _name = "account.invoice.line"
     _inherit = "account.invoice.line"
 
-    _analytic = True
+    _analytic = 'account_invoice_line'
+
+    def move_line_get_item(self, cr, uid, line, context=None):
+        """Override this function to include analytic fields in generated
+        move-line entries.
+        """
+        res = super(account_invoice_line_analytic, self).move_line_get_item(
+            cr, uid, line, context
+        )
+        res.update(self.pool['analytic.structure'].extract_values(
+            cr, uid, line, 'account_move_line', context=context
+        ))
+        return res
 
 
 
@@ -55,7 +67,7 @@ class account_invoice_streamline(models.Model):
     def line_get_convert(self, line, part, date):
         res = super(account_invoice_streamline, self).line_get_convert(line, part, date)
         res.update(self.env['analytic.structure'].extract_values(
-            self._cr, self._uid, line, 'account_invoice_line',
+            line, 'account_invoice_line',
             dest_model='account_move_line',
             context=self._context
         ))
@@ -170,6 +182,8 @@ class account_invoice_streamline(models.Model):
 
             part = self.env['res.partner']._find_accounting_partner(inv.partner_id)
 
+            for l in iml:
+                print l
             line = [(0, 0, self.line_get_convert(l, part.id, date)) for l in iml]
             line = inv.group_lines(iml, line)
 
