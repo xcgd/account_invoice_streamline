@@ -75,6 +75,7 @@
                             <field name="currency_id" groups="base.group_multi_currency" />
                             <field name="check_total"
                                 groups="account.group_supplier_inv_check_total" />
+                            <field name="object_reference" attrs="{'invisible': [('object_reference', '=', False)]}" readonly="True"/>
                         </group>
                     </group>
                     <notebook>

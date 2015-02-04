@@ -42,6 +42,21 @@ class account_invoice_streamline(osv.Model):
         res['arch'] = etree.tostring(tree)
         return res
 
+    def _links_get(self, cr, uid, context=None):
+        """Gets links value for reference field"""
+        obj = self.pool.get('res.request.link')
+        ids = obj.search(cr, uid, [])
+        res = obj.read(cr, uid, ids, ['object', 'name'], context)
+        return [(r['object'], r['name']) for r in res]
+
+    _columns = {
+        'object_reference': fields.reference(
+            u"Linked Object",
+            selection=_links_get,
+            size=128,
+        )
+    }
+
     def fields_view_get(self, cr, uid, view_id=None, view_type=False,
                         context=None, toolbar=False, submenu=False):
         '''
