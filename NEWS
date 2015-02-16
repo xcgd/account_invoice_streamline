@@ -1,6 +1,10 @@
+- Added object_reference field to invoices
+
+
 account_invoice_streamline 1.8
 
-- Added object_reference field to invoices
+* Production release.
+
 
 account_invoice_streamline 1.7.1
 
