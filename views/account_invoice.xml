@@ -287,6 +287,7 @@
                             <div groups="base.group_multi_currency">
                                 <field name="currency_id" class="oe_inline" />
                             </div>
+                            <field name="object_reference" attrs="{'invisible': [('object_reference', '=', False)]}" readonly="True"/>
                         </group>
                     </group>
                     <field name="sent" invisible="1" />
