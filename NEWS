@@ -1,4 +1,13 @@
-- Added object_reference field to invoices
+next
+====
+
+* Don't auto-validate generated accounting entries when validating invoices.
+
+
+1.9
+===
+
+* Added object_reference field to invoices
 
 
 account_invoice_streamline 1.8
