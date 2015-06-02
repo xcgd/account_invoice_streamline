@@ -212,6 +212,11 @@ msgstr "Facture"
 msgid "Reverse Invoice"
 msgstr "Extourner"
 
+#. module: account_invoice_streamline
+#: field:account.invoice,object_reference:0
+msgid "Linked Object"
+msgstr "Objet lié"
+
 #~ msgid "wizard_invoice_cancel"
 #~ msgstr "wizard_invoice_cancel"
 
