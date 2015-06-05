@@ -96,11 +96,10 @@ class account_invoice_streamline(osv.Model):
     def action_move_create(self, cr, uid, ids, context=None):
         """Creates invoice related analytics and financial move lines.
 
-        This function has been copied from account/account_invoice.py:
-        - To PEP8-ify the code.
-        - To use the reference of this invoice as the reference of generated
+        This function has been copied from account/account_invoice.py to:
+        - PEP8-ify the code.
+        - Use the reference of this invoice as the reference of generated
         account-move objects.
-        - Not to auto-validate generated accounting entries.
         """
 
         ait_obj = self.pool.get('account.invoice.tax')
@@ -328,6 +327,10 @@ class account_invoice_streamline(osv.Model):
                 'period_id': period_id,
                 'move_name': new_move_name
             }, context=ctx)
+            # Pass invoice in context in method post: used if you want to get
+            # the same account move reference when creating the same invoice
+            # after a cancelled one:
+            move_obj.post(cr, uid, [move_id], context=ctx)
         self._log_event(cr, uid, ids)
         return True
 
