@@ -93,6 +93,43 @@ class account_invoice_streamline(osv.Model):
         """
         return 'account.invoice,%s' % invoice.id
 
+    def _post_account_move_as_draft(self, mov_obj, cr, uid, ids, 
+                                    context=None):
+        """ Does basically the same thing as account_move.post
+            in module 'account' except that the object is posted as
+            a draft.
+            Note: I replaced all references to 'self' with 'mov_obj'.
+                  Also the 'update' query was removed, see comment below.
+        """
+        if context is None:
+            context = {}
+        invoice = context.get('invoice', False)
+        valid_moves = mov_obj.validate(cr, uid, ids, context)
+
+        if not valid_moves:
+            raise osv.except_osv(_('Error!'), _('You cannot validate a non-balanced entry.\nMake sure you have configured payment terms properly.\nThe latest payment term line should be of the "Balance" type.'))
+        obj_sequence = mov_obj.pool.get('ir.sequence')
+        for move in mov_obj.browse(cr, uid, valid_moves, context=context):
+            if move.name =='/':
+                new_name = False
+                journal = move.journal_id
+
+                if invoice and invoice.internal_number:
+                    new_name = invoice.internal_number
+                else:
+                    if journal.sequence_id:
+                        c = {'fiscalyear_id': move.period_id.fiscalyear_id.id}
+                        new_name = obj_sequence.next_by_id(cr, uid, journal.sequence_id.id, c)
+                    else:
+                        raise osv.except_osv(_('Error!'), _('Please define a sequence on the journal.'))
+
+                if new_name:
+                    mov_obj.write(cr, uid, [move.id], {'name':new_name})
+
+        # Removed SQL query
+        return True
+
+
     def action_move_create(self, cr, uid, ids, context=None):
         """Creates invoice related analytics and financial move lines.
 
@@ -330,7 +367,8 @@ class account_invoice_streamline(osv.Model):
             # Pass invoice in context in method post: used if you want to get
             # the same account move reference when creating the same invoice
             # after a cancelled one:
-            move_obj.post(cr, uid, [move_id], context=ctx)
+#             move_obj.post(cr, uid, [move_id], context=ctx)
+            self._post_account_move_as_draft(move_obj, cr, uid, [move_id], context=ctx)
         self._log_event(cr, uid, ids)
         return True
 
