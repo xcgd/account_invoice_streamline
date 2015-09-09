@@ -363,6 +363,23 @@ ${css}
         usage="default"
       />
 
+   <report
+        id="account.account_invoice_py3o_report"
+        file="account_invoice_streamline/reports/account_invoice_py3o.odt"
+        name="account.invoice.streamline.py3o"
+        model="account.invoice"
+        string="Py3o Invoice"
+        report_type="py3o"
+      />
+
+    <record id="account.account_invoice_py3o_template" model="py3o.template">
+        <field name="name">Py3o Invoice</field>
+    </record>
+
+    <record id="account.account_invoice_py3o_report" model="ir.actions.report.xml">
+        <field name="py3o_template_id" ref="account.account_invoice_py3o_template"/>
+        <field name="py3o_fusion_filetype" ref="report_py3o.py3o_fusion_filetype_pdf"/>
+    </record>
 
   </data>
 </openerp>
